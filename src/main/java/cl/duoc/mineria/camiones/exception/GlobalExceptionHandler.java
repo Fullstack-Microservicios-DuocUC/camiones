@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     public GlobalExceptionHandler() {
-        System.out.println("✅ GlobalExceptionHandler (Módulo Camiones) REGISTRADO DE FORMA AUTOMÁTICA");
+        System.out.println("GlobalExceptionHandler (Módulo Camiones) REGISTRADO DE FORMA AUTOMÁTICA");
     }
 
     // Manejo de errores en los DTOs (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex) {
-        System.out.println("❌ [Camiones Error] - Datos del camión inválidos u omitidos por el cliente");
+        System.out.println("[Camiones Error] - Datos del camión inválidos u omitidos por el cliente");
 
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
             HttpStatus.BAD_REQUEST,
@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleGeneralException(Exception ex) {
-        System.out.println("🔴 CRÍTICO - Excepción no controlada en el módulo de camiones: " + ex.getClass().getName());
+        System.out.println("CRÍTICO - Excepción no controlada en el módulo de camiones: " + ex.getClass().getName());
         ex.printStackTrace();
 
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
