@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
         System.out.println("GlobalExceptionHandler (Módulo Camiones) REGISTRADO DE FORMA AUTOMÁTICA");
     }
 
-    // Manejo de errores en los DTOs (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException ex) {
         System.out.println("[Camiones Error] - Datos del camión inválidos u omitidos por el cliente");
@@ -42,10 +41,9 @@ public class GlobalExceptionHandler {
         return problem;
     }
 
-    // Maneja error cuando no encuentra el ID del camión en la BD
     @ExceptionHandler(CamionNotFoundException.class)
     public ProblemDetail handleCamionNotFound(CamionNotFoundException ex) {
-        System.out.println("⚠️ [Camiones Warning] - Camión solicitado no encontrado: " + ex.getMessage());
+        System.out.println("[Camiones Warning] - Camión solicitado no encontrado: " + ex.getMessage());
 
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
             HttpStatus.NOT_FOUND,
