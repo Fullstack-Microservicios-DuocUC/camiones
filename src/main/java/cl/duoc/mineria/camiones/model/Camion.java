@@ -3,9 +3,7 @@ package cl.duoc.mineria.camiones.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * Entidad de negocio que representa a un Camión Autónomo en la faena minera.
- */
+
 @Entity
 @Table(name = "camiones")
 @Data
