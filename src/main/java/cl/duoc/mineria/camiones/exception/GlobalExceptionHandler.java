@@ -71,4 +71,12 @@ public class GlobalExceptionHandler {
         problem.setProperty("mensajeCorto", ex.getMessage());
         return problem;
     }
+
+    @ExceptionHandler(PatenteDuplicadaException.class)
+    public ProblemDetail handlePatenteDuplicada(PatenteDuplicadaException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problem.setTitle("Patente Duplicada");
+        problem.setProperty("timestamp", Instant.now());
+        return problem;
+    }
 }

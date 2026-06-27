@@ -2,6 +2,7 @@ package cl.duoc.mineria.camiones.service;
 
 
 import cl.duoc.mineria.camiones.exception.CamionNotFoundException;
+import cl.duoc.mineria.camiones.exception.PatenteDuplicadaException;
 import cl.duoc.mineria.camiones.mapper.CamionMapper;
 import cl.duoc.mineria.camiones.model.ActualizarEstadoCamionDTO;
 import cl.duoc.mineria.camiones.model.Camion;
@@ -27,7 +28,7 @@ public class CamionService {
     @Transactional
     public Camion registrarCamion(RegistrarCamionDTO dto) {
         if (camionRepository.findByPatente(dto.getPatente()).isPresent()) {
-            throw new CamionNotFoundException("La patente " + dto.getPatente() + " ya se encuentra registrada en la flota");
+            throw new PatenteDuplicadaException("La patente " + dto.getPatente() + " ya se encuentra registrada en la flota");
         }
         Camion nuevoCamion = camionMapper.toEntity(dto);
         return camionRepository.save(nuevoCamion);
